@@ -1,6 +1,8 @@
 # Kirby3 plugin: Icon sprite
 
-This plugin provides a custom panel for your kirby installation to manage svg icons which can be used in your template to provide a SVG sprite.
+![screen-icon-sprite-panel](demo.jpeg)
+
+This plugin provides helper functions which can be used in your template to generate a SVG sprite, to reference SVG icons in your templates and to inject SVG icons directly to the template. It also provides blueprints for the fileupload and a files section for your site.yml to manage the icons.
 To set custom options, please see the [Options](#options) section in this README file.
 
 > This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider [making a donation of your choice](https://www.paypal.me/nerdcel).
@@ -25,20 +27,22 @@ composer require nerdcel/kirby3-icon-sprite
 
 ## Setup
 
-![screencast-responsive-images-panel](demo.gif)
-
 ### Template
 
 ```php
 <?php svgSprite();  ?>
 <?php svgIcon('slug', 'css-classes', [ /** Additional attributes as key => value */]);  ?>
-<?php inlineIcon('icon-path', 'css-classes');  ?>
+<?php inlineIcon('icon-path or filename', 'css-classes');  ?>
 ```
 
-### Output
+### Site.yml
 
-```html
-// Tbd.
+```yml
+...
+sections:
+  svgicons: sections/svgsprite
+  label: Override
+  ...
 ```
 
 ## Options
@@ -47,19 +51,12 @@ The following options are available to be set using your site/config/config.php
 
 ```php
 'nerdcel.icon-sprite' => [
-    // Tbd.
+    'withStyles' => true,
+    'fill' => '#0a0a0a',
+    'width' => '24px',
+    'aspectRatio' => '1'
 ]
 ```
-
-## Development
-
-Frontend components are based on kirby's internal UI Kit. Development works using the kirbyup npm module.
-To start developing simply run the following cmd from the plugin root:
-```shell
-npm run dev
-```
-
-If that doesn't work, rund ```npm install``` first.
 
 ## License
 

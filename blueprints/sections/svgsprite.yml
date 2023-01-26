@@ -1,0 +1,12 @@
+label: Icons
+type: files
+layout: cards
+size: tiny
+template: svgicon
+uploads: svgicon
+parent: site
+limit: 10
+image:
+  cover: false
+  ratio: 4/3
+  back: white
