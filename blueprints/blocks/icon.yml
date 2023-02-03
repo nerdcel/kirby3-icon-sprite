@@ -1,0 +1,45 @@
+name: Icon
+icon: smile
+
+tabs:
+  content:
+    label: Inhalt
+    fields:
+      icon:
+        label: Icon
+        type: files
+        query: site.files.filterBy('template', 'svg')
+        template: svg
+        uploads: false
+        required: true
+        width: 1/2
+        max: 1
+      size:
+        label: Größe
+        type: select
+        default: medium
+        options:
+          small: Klein
+          medium: Mittel
+          large: Groß
+          full: Ganze Breite
+        width: 1/2
+  settings:
+    label: Einstellungen
+    fields:
+      color:
+        label: Farbe
+        type: toggles
+        default: text
+        options:
+          text: Textfarbe
+          dark: Dunkel
+          light: Hell
+      classname:
+        type: slug
+        label: CSS Klasse
+        width: 1/2
+      animationclassname:
+        type: slug
+        label: CSS Klasse für Animation
+        width: 1/2

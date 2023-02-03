@@ -6,7 +6,12 @@ Kirby::plugin('nerdcel/icon-sprite', [
     'options' => require __DIR__ . '/src/config.php',
 
     'blueprints' => [
+        'blocks/icon' => __DIR__ . '/blueprints/blocks/icon.yml',
         'files/svgicon' => __DIR__ . '/blueprints/files/svgicon.yml',
         'sections/svgsprite' => __DIR__ . '/blueprints/sections/svgsprite.yml',
-    ]
+    ],
+
+    'api' => [
+        'routes' => require 'src/routes.php'
+    ],
 ]);
