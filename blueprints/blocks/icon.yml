@@ -8,7 +8,7 @@ tabs:
       icon:
         label: Icon
         type: files
-        query: site.files.filterBy('template', 'svg')
+        query: site.files.filterBy('template', 'svgicon')
         template: svg
         uploads: false
         required: true
@@ -38,8 +38,4 @@ tabs:
       classname:
         type: slug
         label: CSS Klasse
-        width: 1/2
-      animationclassname:
-        type: slug
-        label: CSS Klasse für Animation
         width: 1/2

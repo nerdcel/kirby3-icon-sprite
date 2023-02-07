@@ -14,4 +14,8 @@ Kirby::plugin('nerdcel/icon-sprite', [
     'api' => [
         'routes' => require 'src/routes.php'
     ],
+
+    'snippets' => [
+        'blocks/icon' => __DIR__ . '/snippets/blocks/icon.php',
+    ],
 ]);
