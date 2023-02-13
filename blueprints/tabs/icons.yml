@@ -1,0 +1,14 @@
+label: Icons
+icon: code
+sections:
+  icons:
+    label: Icons
+    type: files
+    layout: cardlets
+    template: svgicon
+    uploads: svgicon
+    parent: site
+    cover: true
+    image:
+      cover: true
+      ratio: 4/5
