@@ -30,9 +30,9 @@ composer require nerdcel/kirby3-icon-sprite
 ### Template
 
 ```php
-<?php svgSprite();  ?>
-<?php svgIcon('slug', 'css-classes', [ /** Additional attributes as key => value */]);  ?>
-<?php inlineIcon('icon-path or filename', 'css-classes');  ?>
+<?php echo svgSprite();  ?>
+<?php echo svgIcon('slug', 'css-classes', [ /** Additional attributes as key => value */]);  ?>
+<?php //echo inlineIcon('icon-path or filename', 'css-classes');  ?>
 ```
 
 ### Site.yml
