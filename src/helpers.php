@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\File;
 use Nerdcel\IconSprite\SvgIcons;
 
 if (! function_exists('arr2attr')) {
@@ -50,5 +51,19 @@ if (! function_exists('inlineSvg')) {
             $icon = file_get_contents($icon);
         }
         echo "<div class=\"icon $class\">".$icon."</div>";
+    }
+}
+
+if (! function_exists('addSvgIcon')) {
+    function addSvgIcon(File $icon, $classes = ''): string
+    {
+        $svgIcons = SvgIcons::getInstance();
+        $path = $svgIcons->transformPath($icon->root());
+        if ($svgIcons->exists($path)) {
+            return '<svg' . ( $classes ? ' class="' . $classes . '"' : '' ) . '><use xlink:href="#icon-' . $path . '"></use></svg>';
+        }
+        $svgIcons->add($icon, $path);
+
+        return '<svg' . ( $classes ? ' class="' . $classes . '"' : '' ) . '><use xlink:href="#icon-' . $path . '"></use></svg>';
     }
 }

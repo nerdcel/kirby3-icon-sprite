@@ -43,11 +43,21 @@ class SvgIcons
      *
      * @return void
      */
-    public function add(File $file): void
+    public function add(File $file, $name = null): void
     {
-        if (! array_key_exists($file->filename(), self::$icons)) {
-            self::$icons[] = $this->checkFile($file);
+        if (! $this->exists($name ?? $file->filename())) {
+            self::$icons[$name ?? $file->filename()] = $this->checkFile($file, $name);
         }
+    }
+
+    /**
+     * @param  string  $name
+     *
+     * @return bool
+     */
+    public function exists(string $name): bool
+    {
+        return array_key_exists($name, self::$icons);
     }
 
     /**
@@ -55,16 +65,21 @@ class SvgIcons
      *
      * @return bool|string
      */
-    private function checkFile(File $file): bool|string
+    private function checkFile(File $file, $name = null): bool|string
     {
         $dom = new DOMDocument();
         $dom->load($file->root());
 
         if (! $dom->documentElement->hasAttribute('id')) {
-            $dom->documentElement->setAttribute('id', 'icon-'.$file->name());
+            $dom->documentElement->setAttribute('id', 'icon-'.($name ?? $file->name()));
         }
 
         return $dom->saveHTML();
+    }
+
+    public function transformPath($path): string
+    {
+        return md5($path);
     }
 
     /**
