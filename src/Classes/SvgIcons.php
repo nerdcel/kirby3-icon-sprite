@@ -8,12 +8,12 @@ use stdClass;
 
 class SvgIcons
 {
+    protected static array $icons = [];
     protected bool $withStyles = false;
     protected string $width;
     protected string $fill;
     protected string $aspectRatio;
     protected static $instance;
-    protected static array $icons = [];
 
     /**
      * gets the instance via lazy initialization (created on first usage)
@@ -40,14 +40,27 @@ class SvgIcons
      * Add icon to sprite array
      *
      * @param  File  $file
+     * @param  null  $name
      *
      * @return void
      */
     public function add(File $file, $name = null): void
     {
         if (! $this->exists($name ?? $file->filename())) {
-            self::$icons[$name ?? $file->filename()] = $this->checkFile($file, $name);
+            self::$icons[$name ?? $file->filename()]['icon'] = $this->checkFile($file, $name);
+            self::$icons[$name ?? $file->filename()]['info'] = $this->transform(self::$icons[$name ?? $file->filename()]['icon']);
         }
+    }
+
+    /**
+     * @param  File  $file
+     * @param $name
+     *
+     * @return array
+     */
+    public function get(File $file, $name = null): array
+    {
+        return self::$icons[$name ?? $file->filename()];
     }
 
     /**
@@ -126,7 +139,7 @@ class SvgIcons
         }
 
         foreach (self::$icons as $icon) {
-            $symbol = $this->transform($icon);
+            $symbol = $icon['info'];
 
             $output .= $symbol->code;
         }

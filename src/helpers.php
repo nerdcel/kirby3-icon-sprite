@@ -59,11 +59,14 @@ if (! function_exists('addSvgIcon')) {
     {
         $svgIcons = SvgIcons::getInstance();
         $path = $svgIcons->transformPath($icon->root());
-        if ($svgIcons->exists($path)) {
-            return '<svg' . ( $classes ? ' class="' . $classes . '"' : '' ) . '><use xlink:href="#icon-' . $path . '"></use></svg>';
-        }
-        $svgIcons->add($icon, $path);
 
-        return '<svg' . ( $classes ? ' class="' . $classes . '"' : '' ) . '><use xlink:href="#icon-' . $path . '"></use></svg>';
+        if (!$svgIcons->exists($path)) {
+            $svgIcons->add($icon, $path);
+        }
+
+        $info = $svgIcons->get($icon, $path);
+        $viewBox = $info['info']->viewbox ?? null;
+
+        return '<svg' . ($viewBox ? ' viewBox="' . $viewBox . '"' : '') . ( $classes ? ' class="' . $classes . '"' : '' ) . '><use xlink:href="#icon-' . $path . '"></use></svg>';
     }
 }
