@@ -48,7 +48,7 @@ class SvgIcons
     {
         if (! $this->exists($name ?? $file->filename())) {
             self::$icons[$name ?? $file->filename()]['icon'] = $this->checkFile($file, $name);
-            self::$icons[$name ?? $file->filename()]['info'] = $this->transform(self::$icons[$name ?? $file->filename()]['icon']);
+            self::$icons[$name ?? $file->filename()]['info'] = $this->transform(self::$icons[$name ?? $file->filename()]['icon'], $name ?? $file->filename());
         }
     }
 
@@ -102,7 +102,7 @@ class SvgIcons
      *
      * @return stdClass
      */
-    private function transform($icon): stdClass
+    private function transform($icon, $id): stdClass
     {
         $dom = new DOMDocument();
         $dom->loadXML($icon);
@@ -111,16 +111,15 @@ class SvgIcons
 
         preg_match($reg, $icon, $matches);
 
-        $id = $svg->getAttribute('id');
         $viewBox = $svg->getAttribute('viewBox');
 
         $tmp = new stdClass();
-        $tmp->id = $id;
+        $tmp->id = 'icon-' . $id;
         $tmp->viewbox = $viewBox;
         $tmp->code = '!! invalid svg !!';
 
         if ($matches) {
-            $tmp->code = '<symbol id="'.$id.'" viewBox="'.$viewBox.'">'.$matches['code'].'</symbol>';
+            $tmp->code = '<symbol id="'.$tmp->id.'" viewBox="'.$tmp->viewbox.'">'.$matches['code'].'</symbol>';
         }
 
         return $tmp;
