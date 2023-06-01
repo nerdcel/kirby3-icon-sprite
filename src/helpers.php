@@ -55,7 +55,14 @@ if (! function_exists('inlineSvg')) {
 }
 
 if (! function_exists('addSvgIcon')) {
-    function addSvgIcon(File $icon, $classes = ''): string
+    /**
+     * @param  File  $icon
+     * @param  string|null  $classes
+     * @param  bool  $asArray
+     *
+     * @return array|string
+     */
+    function addSvgIcon(File $icon, string $classes = null, bool $asArray = false): array|string
     {
         $svgIcons = SvgIcons::getInstance();
         $path = $svgIcons->transformPath($icon->root());
@@ -66,6 +73,14 @@ if (! function_exists('addSvgIcon')) {
 
         $info = $svgIcons->get($icon, $path);
         $viewBox = $info['info']->viewbox ?? null;
+
+        if ($asArray) {
+            return [
+                'href' => '#icon-' . $path,
+                'viewBox' => $viewBox,
+                'classes' => $classes,
+            ];
+        }
 
         return '<svg' . ($viewBox ? ' viewBox="' . $viewBox . '"' : '') . ( $classes ? ' class="' . $classes . '"' : '' ) . '><use xlink:href="#icon-' . $path . '"></use></svg>';
     }
