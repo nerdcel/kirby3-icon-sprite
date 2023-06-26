@@ -46,9 +46,9 @@ class SvgIcons
      */
     public function add(File $file, $name = null): void
     {
-        if (! $this->exists($name ?? $file->filename())) {
-            self::$icons[$name ?? $file->filename()]['icon'] = $this->checkFile($file, $name);
-            self::$icons[$name ?? $file->filename()]['info'] = $this->transform(self::$icons[$name ?? $file->filename()]['icon'], $name ?? $file->filename());
+        if (! $this->exists($name ?? $file->name())) {
+            self::$icons[$name ?? $file->name()]['icon'] = $this->checkFile($file, $name);
+            self::$icons[$name ?? $file->name()]['info'] = $this->transform(self::$icons[$name ?? $file->name()]['icon'], $name ?? $file->name());
         }
     }
 
@@ -60,7 +60,7 @@ class SvgIcons
      */
     public function get(File $file, $name = null): array
     {
-        return self::$icons[$name ?? $file->filename()];
+        return self::$icons[$name ?? $file->name()];
     }
 
     /**
