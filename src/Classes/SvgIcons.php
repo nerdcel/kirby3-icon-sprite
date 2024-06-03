@@ -87,6 +87,21 @@ class SvgIcons
             $dom->documentElement->setAttribute('id', 'icon-'.($name ?? $file->name()));
         }
 
+        // Get all ids and make them unique. Also change the reference to the id so that clip-path etc. still work
+        $ids = $dom->getElementsByTagName('use');
+        foreach ($ids as $id) {
+            $id->setAttribute('id', 'icon-'.($name?? $file->name()).'-'.$id->getAttribute('id'));
+        }
+
+        // Get all clip-paths and make them unique. Also change the reference to the id so that clip-path etc. still work
+        $clipPaths = $dom->getElementsByTagName('clipPath');
+        foreach ($clipPaths as $clipPath) {
+            $clipPath->setAttribute('id', 'icon-'.($name?? $file->name()).'-'.$clipPath->getAttribute('id'));
+        }
+
+        // Get all clip-paths and make them unique. Also change the reference to the id so that clip-path etc. still work
+        $defs = $dom->getElementsByTagName('defs');
+
         return $dom->saveHTML();
     }
 
