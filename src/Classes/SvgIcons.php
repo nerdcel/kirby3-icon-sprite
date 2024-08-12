@@ -87,22 +87,26 @@ class SvgIcons
             $dom->documentElement->setAttribute('id', 'icon-'.($name ?? $file->name()));
         }
 
-        // Get all ids and make them unique. Also change the reference to the id so that clip-path etc. still work
-        $ids = $dom->getElementsByTagName('use');
+        // Get all elements with an ID
+        $ids = [];
+        $elements = $dom->getElementsByTagName('*');
+        
+        foreach ($elements as $element) {
+            if ($element->hasAttribute('id')) {
+                $ids[] = $element->getAttribute('id');
+            }
+        }
+        
+        // Transform all ids and there references in the SVG
+        $textRep = $dom->saveHTML();
         foreach ($ids as $id) {
-            $id->setAttribute('id', 'icon-'.($name?? $file->name()).'-'.$id->getAttribute('id'));
+            $newId = 'icon-'. $this->transformPath($id);
+            // Search and replace only if it starts with # or "
+            $textRep = preg_replace('/(?<=#)'.$id.'/', $newId, $textRep);
+            $textRep = preg_replace('/(?<=\")'.$id.'/', $newId, $textRep);
         }
-
-        // Get all clip-paths and make them unique. Also change the reference to the id so that clip-path etc. still work
-        $clipPaths = $dom->getElementsByTagName('clipPath');
-        foreach ($clipPaths as $clipPath) {
-            $clipPath->setAttribute('id', 'icon-'.($name?? $file->name()).'-'.$clipPath->getAttribute('id'));
-        }
-
-        // Get all clip-paths and make them unique. Also change the reference to the id so that clip-path etc. still work
-        $defs = $dom->getElementsByTagName('defs');
-
-        return $dom->saveHTML();
+        
+        return $textRep;
     }
 
     public function transformPath($path): string
