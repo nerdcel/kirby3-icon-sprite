@@ -30,7 +30,7 @@ if (! function_exists('svgSprite')) {
         $svgIcons = SvgIcons::getInstance();
 
         foreach ($icons as $icon) {
-            $svgIcons->add($icon);
+            $svgIcons->add($icon, $svgIcons->transformPath($icon->root()));
         }
 
         return $svgIcons->sprite();
