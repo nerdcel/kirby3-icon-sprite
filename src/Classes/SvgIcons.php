@@ -90,13 +90,13 @@ class SvgIcons
         // Get all elements with an ID
         $ids = [];
         $elements = $dom->getElementsByTagName('*');
-        
+
         foreach ($elements as $element) {
             if ($element->hasAttribute('id')) {
                 $ids[] = $element->getAttribute('id');
             }
         }
-        
+
         // Transform all ids and there references in the SVG
         $textRep = $dom->saveHTML();
         foreach ($ids as $id) {
@@ -105,7 +105,7 @@ class SvgIcons
             $textRep = preg_replace('/(?<=#)'.$id.'/', $newId, $textRep);
             $textRep = preg_replace('/(?<=\")'.$id.'/', $newId, $textRep);
         }
-        
+
         return $textRep;
     }
 
@@ -124,7 +124,7 @@ class SvgIcons
     private function transform($icon, $id): stdClass
     {
         $dom = new DOMDocument();
-        $dom->loadXML($icon);
+        $dom->loadXML(html_entity_decode($icon, ENT_QUOTES, 'UTF-8'));
         $svg = $dom->documentElement;
         $reg = "/<svg.*?>(?<code>.*?)<\/svg>/s";
 
