@@ -139,7 +139,7 @@ class SvgIcons
 
         if ($matches) {
             $viewBox = $tmp->viewbox ? ' viewBox="' . $tmp->viewbox . '" ' : null;
-            $tmp->code = '<symbol id="'.$tmp->id.'"'.$viewBox.$matches['code'].'</symbol>';
+            $tmp->code = '<symbol id="'.$tmp->id.'"'.$viewBox.'>'.$matches['code'].'</symbol>';
         }
 
         return $tmp;
