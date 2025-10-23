@@ -82,6 +82,6 @@ if (! function_exists('addSvgIcon')) {
             ];
         }
 
-        return '<svg' . ($viewBox ? ' viewBox="' . $viewBox . '"' : '') . ( $classes ? ' class="' . $classes . '"' : '' ) . '><use xlink:href="#icon-' . $path . '"></use></svg>';
+        return '<svg' . ($viewBox ? ' viewBox="' . $viewBox . '"' : '') . ( $classes ? ' class="' . $classes . '"' : '' ) . ' aria-hidden><use xlink:href="#icon-' . $path . '"></use></svg>';
     }
 }
