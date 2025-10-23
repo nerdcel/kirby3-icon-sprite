@@ -19,7 +19,7 @@ if (! function_exists('arr2attr')) {
 if (! function_exists('svgIcon')) {
     function svgIcon($icon = '', $class = 'w-6 h-6', $additionalAttr = [], $viewBox = "0 0 24 24"): string
     {
-        return '<svg '.arr2attr($additionalAttr).' viewBox="'.$viewBox.'" class="'.$class.' icon icon-'.$icon.'"><use xlink:href="#icon-'.$icon.'"></use></svg>';
+        return '<svg '.arr2attr($additionalAttr).' viewBox="'.$viewBox.'" class="'.$class.' icon icon-'.$icon.'" aria-hidden><use xlink:href="#icon-'.$icon.'"></use></svg>';
     }
 }
 
