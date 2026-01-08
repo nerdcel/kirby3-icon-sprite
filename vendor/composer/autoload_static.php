@@ -12,22 +12,22 @@ class ComposerStaticInit3ed1ba07a0145f54065c42173a12b414
     );
 
     public static $prefixLengthsPsr4 = array (
-        'N' => 
+        'N' =>
         array (
             'Nerdcel\\IconSprite\\' => 19,
         ),
-        'K' => 
+        'K' =>
         array (
             'Kirby\\' => 6,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Nerdcel\\IconSprite\\' => 
+        'Nerdcel\\IconSprite\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/Classes',
         ),
-        'Kirby\\' => 
+        'Kirby\\' =>
         array (
             0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
         ),
