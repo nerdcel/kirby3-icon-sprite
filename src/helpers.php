@@ -62,7 +62,7 @@ if (! function_exists('addSvgIcon')) {
      *
      * @return array|string
      */
-    function addSvgIcon(File $icon, string $classes = null, bool $asArray = false): array|string
+    function addSvgIcon(File $icon, ?string $classes = null, bool $asArray = false): array|string
     {
         $svgIcons = SvgIcons::getInstance();
         $path = $svgIcons->transformPath($icon->root());
